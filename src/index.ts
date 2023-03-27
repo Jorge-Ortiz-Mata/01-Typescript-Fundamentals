@@ -13,7 +13,6 @@ let user: [number, string] = [19, 'Jorge']
 // const medium = 2;
 // const large = 3;
 
-
 const enum CustomSize { Small = 1, Medium, Large }
 let mySize: CustomSize = CustomSize.Medium;
 console.log(mySize);
@@ -40,12 +39,54 @@ let employee: Employee = {
   id: 1,
   name: 'Martha',
   retire: (date: Date) => {
-    console.log('====================================');
     console.log(date)
-    console.log('====================================');
   }
 }
 
 console.log(employee.id)
 console.log(employee.name)
 employee.retire(new Date())
+
+// ----------- Union Types -------------
+function kgToLbs(weight: number | string): number {
+  // Narrowing
+
+  if(typeof weight === 'number')
+    return weight * 2
+  else
+    return parseInt(weight) * 5
+}
+
+kgToLbs(10)
+kgToLbs('10')
+
+// ---------- Intersection --------------
+type Draggable = {
+  drag: () => void
+};
+
+type Reziable = {
+  resize: () => void
+}
+
+type UIWidget = Draggable & Reziable;
+
+let textBox: UIWidget = {
+  drag: () => {},
+  resize: () => {}
+}
+
+// -------- Literal Types -------------
+type QuantityNumber = 50 | '50'
+let quantity: QuantityNumber = '50';
+
+type CustomMetric = 'cm' | 'ft' | 'in';
+let metric: CustomMetric = 'ft'
+
+// ---------- Null and Undefined values ---------
+
+function sayName(name: string | undefined | null) {
+  console.log(name)
+}
+
+sayName(null)
